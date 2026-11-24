@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}My Loans{% endblock %}
+{% block header %}My Loans{% endblock %}
+
+{% block content %}
+
+
+  <div class = "item_display_wrapper">
+    <div class = "item_display_container">
+      {% for item in loaned_items %}
+      <div class = "item_display_grid">
+        <a>{{ item.item_name }}</a>
+        <div class = "pusher">
+          <div class = "button_wrapper">
+              <a href="/return/{{ item.id }}/" class="return_button">return</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  
+
+  </div>
+
+{% endblock %}

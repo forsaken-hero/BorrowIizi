@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Front Page{% endblock %}
+{% block header %}Front Page{% endblock %}
+
+{% block content %}
+  <p class = "main_text">Welcome!</p>
+  <p>Available items:</p>
+  <div class ="item_display_wrapper">
+    <div class = "item_display_container">
+      {% for item in available_items %}
+        <div class = "item_display_grid">
+          <a>{{ item.item_name }}</a>
+          <div class = "pusher">
+            <div class = "button_wrapper">
+              <a href="/loan/{{ item.id }}/" class="loan_button">loan</a>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <p>No available items at the moment.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

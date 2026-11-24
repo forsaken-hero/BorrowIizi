@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BorrowIizi - {% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="/static/main.css">
+</head>
+
+<body>
+  {%comment%}
+  <p>Authenticated: {{ user.is_authenticated }}</p>
+  <p>Username: {{ user.username }}</p>
+  <p>User ID: {{ user.id }}</p>
+  {%endcomment%}
+
+  
+
+  <div class="page">
+    <div class="header">
+      <h2>{% block header %}{% endblock %}</h2>
+    </div>
+    <hr>
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+  {% block menu %}
+    <div class="nav">
+      <nav>
+        <ul>
+            
+          <li><a href="/front_page/">Front Page</a></li>
+          <li><a href="/loans/">My Loans</a></li>
+          <li>
+            <form method="POST" action="/sign_out/">
+              {% csrf_token %}
+              <button type="submit" id = "sign_out_button">Sign Out</button>
+            </form>
+            {% comment %}
+            <form method="POST" action="/sign_out/">
+              <button type="submit" id = "sign_out_button">Sign Out</button>
+            </form>
+            {% endcomment %}
+          </li>
+            
+        </ul>
+      </nav>
+    </div>
+  {% endblock %}
+</body>
+</html>

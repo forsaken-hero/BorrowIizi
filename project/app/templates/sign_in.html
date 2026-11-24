@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block header %}Sign In{% endblock %}
+
+
+
+{% block content %}
+
+
+
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Login" />
+    </form>
+{% comment %}   
+    <form method="POST" novalidate>
+        {{form.as_p}}
+        <input type="submit" value="Login" />
+    </form>
+{% endcomment %}     
+
+    <p>No account yet?</p>
+
+<a href="{%url 'sign_up' %}">Sign Up</a>
+{% endblock %}
+
+{% block menu %}{% endblock %}
