@@ -41,15 +41,16 @@
           <li><a href="/front_page/">Front Page</a></li>
           <li><a href="/loans/">My Loans</a></li>
           <li>
+            {% comment %}
             <form method="POST" action="/sign_out/">
               {% csrf_token %}
               <button type="submit" id = "sign_out_button">Sign Out</button>
             </form>
-            {% comment %}
+            {% endcomment %}
             <form method="POST" action="/sign_out/">
               <button type="submit" id = "sign_out_button">Sign Out</button>
             </form>
-            {% endcomment %}
+            
           </li>
             
         </ul>
