@@ -6,18 +6,18 @@
 {% block content %}
 
 Username has to be between {{USERNAME_MINLENGTH}} until {{USERNAME_MAXLENGTH}} characters long <br />
-
+{% comment %}
 <form method="POST" novalidate>
 	{% csrf_token %}
 	{{ form.as_p }}		
 	<input type="submit" value="Register" />
 </form>
-{% comment %}
+{% endcomment %}
 <form method="POST" novalidate>
 	{{ form.as_p }}		
 	<input type="submit" value="Register" />
 </form>
-{% endcomment %}
+
 
 <br />
 <a href="{%url 'sign_in' %}">Sign In</a>
