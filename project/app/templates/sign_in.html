@@ -9,18 +9,18 @@
 {% block content %}
 
 
-
+{% comment %}
     <form method="POST" novalidate>
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="Login" />
     </form>
-{% comment %}   
+{% endcomment %} 
     <form method="POST" novalidate>
         {{form.as_p}}
         <input type="submit" value="Login" />
     </form>
-{% endcomment %}     
+    
 
     <p>No account yet?</p>
 
