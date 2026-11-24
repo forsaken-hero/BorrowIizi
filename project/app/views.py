@@ -131,11 +131,11 @@ def without_return_check(request, item_id): #skip the authenticated user checkin
 
 ###########################################VIEWS##########################################
 
-#@csrf_exempt
+@csrf_exempt
 def sign_in(request):
     try:
-        unauth_check(request)
-        #without_unauth_check(request)
+        #unauth_check(request)
+        without_unauth_check(request)
     except PermissionDenied:
         return redirect('front_page')
     
@@ -151,42 +151,42 @@ def sign_in(request):
         if form.is_valid():
             username = request.POST.get('username', '').strip()
             password = request.POST.get('password', '')
-            return hashed_sign_in(request,username,password)
-            #return unhashed_sign_in(request,username,password)
+            #return hashed_sign_in(request,username,password)
+            return unhashed_sign_in(request,username,password)
         #print("form is invalid")
         messages.error(request, 'The provided credentials are invalid')
         return render(request, 'sign_in.html', {'form': form})
 
-#@csrf_exempt
+@csrf_exempt
 def sign_up(request):
     try:
-        unauth_check(request)
-        #without_unauth_check(request)
+        #unauth_check(request)
+        without_unauth_check(request)
     except PermissionDenied:
         return redirect('front_page')
     if request.method == 'POST':
-        form = forms.SignUpForm(request.POST)
-        #form = forms.CustomSignUpForm(request.POST) 
+        #form = forms.SignUpForm(request.POST)
+        form = forms.CustomSignUpForm(request.POST) 
         #print("sign_up method POST called, the request data:",request,"request.POST data:",request.POST,"form data:",form)
         try:
-            hashed_sign_up(form)
-            #unhashed_sign_up(form)
+            #hashed_sign_up(form)
+            unhashed_sign_up(form)
         except ValueError:
             messages.error(request, 'The provided data are invalid')
             return redirect('sign_up')
         messages.success(request, 'You have singed up successfully.')
         return redirect('sign_in')
     if request.method == 'GET':
-        form = forms.SignUpForm()
-        #form = forms.CustomSignUpForm()
+        #form = forms.SignUpForm()
+        form = forms.CustomSignUpForm()
         return render(request, 'sign_up.html', {'form': form})
 
 
 #@csrf_exempt
 def front_page(request):
     try:
-        auth_check(request)
-        #without_auth_check(request)
+        #auth_check(request)
+        without_auth_check(request)
     except PermissionDenied:
         return redirect('sign_in')
     available_items = models.Item.objects.filter(item_loaner__isnull=True)
@@ -195,12 +195,12 @@ def front_page(request):
         "available_items": available_items,
         })
     
-#@csrf_exempt
+@csrf_exempt
 def loan(request, item_id):
 
     try:
-        item = loan_check(request, item_id)
-        #item = without_loan_check(request, item_id)
+        #item = loan_check(request, item_id)
+        item = without_loan_check(request, item_id)
     except PermissionDenied:
         return redirect('sign_in')
     except SuspiciousOperation:
@@ -225,11 +225,11 @@ def loan(request, item_id):
         return redirect('front_page')
         
 
-#@csrf_exempt
+@csrf_exempt
 def ret(request,item_id):
     try:
-        item = return_check(request, item_id)
-        #item = without_return_check(request, item_id)
+        #item = return_check(request, item_id)
+        item = without_return_check(request, item_id)
     except PermissionDenied:
         return redirect('sign_in')
     except SuspiciousOperation:
@@ -264,7 +264,7 @@ def loans(request):
         "loaned_items": loaned_items,
     })
 
-#@csrf_exempt    
+@csrf_exempt    
 def sign_out(request):
     logout(request)
     messages.success(request, 'You signed out')
