@@ -160,25 +160,25 @@ def sign_in(request):
 #@csrf_exempt
 def sign_up(request):
     try:
-        #unauth_check(request)
-        without_unauth_check(request)
+        unauth_check(request)
+        #without_unauth_check(request)
     except PermissionDenied:
         return redirect('front_page')
     if request.method == 'POST':
-        #form = forms.SignUpForm(request.POST)
-        form = forms.CustomSignUpForm(request.POST) 
+        form = forms.SignUpForm(request.POST)
+        #form = forms.CustomSignUpForm(request.POST) 
         #print("sign_up method POST called, the request data:",request,"request.POST data:",request.POST,"form data:",form)
         try:
-            #hashed_sign_up(form)
-            unhashed_sign_up(form)
+            hashed_sign_up(form)
+            #unhashed_sign_up(form)
         except ValueError:
             messages.error(request, 'The provided data are invalid')
             return redirect('sign_up')
         messages.success(request, 'You have singed up successfully.')
         return redirect('sign_in')
     if request.method == 'GET':
-        #form = forms.SignUpForm()
-        form = forms.CustomSignUpForm()
+        form = forms.SignUpForm()
+        #form = forms.CustomSignUpForm()
         return render(request, 'sign_up.html', {'form': form})
 
 
