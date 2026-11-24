@@ -22,17 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-#SECRET_KEY = 'django-insecure-rxb%)q5ebmj=&dx!ecct4kqdv^r-%6@fpjs)2kul4wyp3$6w1e'
+SECRET_KEY = 'django-insecure-rxb%)q5ebmj=&dx!ecct4kqdv^r-%6@fpjs)2kul4wyp3$6w1e'
 
 # Add a default value to prevent the app from crashing if the key is missing during local dev
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key-for-local-testing')
+#SECRET_KEY = config('SECRET_KEY', default='django-insecure-fallback-key-for-local-testing')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-'''
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -44,8 +44,8 @@ LOGGING = {
     },
 }
 LOGGING_CONFIG = None
-'''
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True #False
+
+#SESSION_EXPIRE_AT_BROWSER_CLOSE = True #False
 
 # Application definition
 
